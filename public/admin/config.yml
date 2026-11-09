@@ -3,6 +3,11 @@
 backend:
   name: git-gateway
   branch: main
+  # Talk to Git Gateway on Netlify directly instead of through the Vercel rewrite at
+  # nokitlab.com/.netlify/git. Going through nokitlab.com sends the browser's cookies for
+  # that domain plus Vercel's forwarding headers, and saving failed with HTTP 431
+  # (request headers too large), shown in the admin as "%{details}".
+  gateway_url: https://nokitlab.netlify.app/.netlify/git
   commit_messages:
     create: 'Add {{collection}} "{{slug}}"'
     update: 'Update {{collection}} "{{slug}}"'
